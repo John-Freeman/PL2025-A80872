@@ -1,6 +1,6 @@
 import re
 from collections import Counter
-file_path = 'obras.csv'
+file_path = "TPC2\obras.csv"
 
 with open(file_path, 'r', encoding='utf-8') as file:
     lines = file.readlines()
