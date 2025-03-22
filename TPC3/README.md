@@ -10,3 +10,5 @@ Syntax" da Cheat Sheet
 Lista de Resultados:
 
 ![alt text](resultado4.PNG)
+![alt text](resultado5.PNG)
+![alt text](resultado6.PNG)

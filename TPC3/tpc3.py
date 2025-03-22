@@ -14,9 +14,8 @@ text = re.sub(r"\*(.*?)\*", r"<i>\1</i>", text)
 text = re.sub(r"[!\[](.*?)[\]][(](.*?)[)]", r'<a href="\2">"\1"</a>"', text)
 text = re.sub(r"[\[](.*?)[\]][(](.*?)[)]", r'<a href="\1" alt = "\2"/>"', text)
 
-text = re.sub(r"\d+.\s*(.*)", r"<il>\1</il>", text)
-
-result = re.sub(r"(\d+)\. (.*?)\n?", r"<li>\2</li>\n", text)
-text = f"<ol>\n{result}\n</ol>"
+if (bool(re.search(r"\d+.\s*(.*)", text))):
+    text = re.sub(r"\d+.\s*(.*)", r"<il>\1</il>", text)
+    text = f"<ol>\n{text}\n</ol>"
 
 print(text)
