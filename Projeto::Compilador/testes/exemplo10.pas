@@ -1,10 +1,30 @@
-program TesteErroIndiceNegativo;
+program ContaPalavras;
+
 var
-    arr: array[0..5] of integer;
-    x: integer;
+  frase: string;
+  i, contador: integer;
+  dentroPalavra: boolean;
+
 begin
-    arr[0] := 10;   
-    {erro aceder a indice negativo do array}  
-    x := arr[-1];        
-    writeln(x);
+  writeln('Digite uma frase:');
+  readln(frase);
+
+  contador := 0;
+  dentroPalavra := False;
+
+  for i := 1 to length(frase) do
+  begin
+    if (frase[i] <> ' ') then
+    begin
+      if not dentroPalavra then
+      begin
+        dentroPalavra := True;
+        contador := contador + 1;
+      end;
+    end
+    else
+      dentroPalavra := False;
+  end;
+
+  writeln('Numero de palavras: ', contador);
 end.

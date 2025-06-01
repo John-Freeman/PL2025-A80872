@@ -96,7 +96,7 @@ def t_DOWNTO(t):
     return t
 
 def t_LENGTH(t):
-    r'length'
+    r'[Ll]ength'
     return t
 
 def t_WRITE(t):
@@ -124,8 +124,8 @@ def t_OF(t):
     return t
 
 def t_BOOLEAN_LITERAL(t):
-    r'\b(true|false)\b'
-    t.value = 1 if t.value == 'true' else 0  # Converte para integer: true -> 1, false -> 0
+    r'\b([Tt]rue|[Ff]alse)\b'
+    t.value = 1 if t.value.lower() == 'true' else 0  # Converte para integer: true -> 1, false -> 0
     return t
 
 def t_STRING_TYPE(t):
@@ -198,7 +198,6 @@ writeln('Introduza uma string binária:');
 readln(bin);
 valor := 0;
 potencia := 1;
-bin[1] := "a";
 for i := length(bin) downto 1 do
 begin
 if bin[i] = '1' then

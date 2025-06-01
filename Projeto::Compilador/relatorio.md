@@ -1,5 +1,10 @@
 # Relatório do Projeto: Compilador para Pascal Standard
 
+### Elementos
+
+- **Nome**: João Carvalho  **Número**: A94015
+- **Nome**:  **Número**:
+
 ## Introdução
 
 Este relatório descreve a implementação de um compilador para a linguagem *Pascal Standard*, desenvolvido no âmbito da disciplina de Processamento de Linguagens 2025. O objetivo principal foi construir um compilador capaz de analisar, interpretar e traduzir código Pascal para código executável numa máquina virtual (EWVM) fornecida pelos professores. O compilador abrange as etapas de análise léxica, análise sintática, análise semântica e geração de código, com testes realizados para validar a sua funcionalidade.
@@ -167,8 +172,7 @@ term : term TIMES factor
      | term MOD factor
      | factor
 
-factor : MINUS factor
-       | LENGTH LPAREN expr RPAREN
+factor : LENGTH LPAREN expr RPAREN
        | primary
 
 primary : NUMBER
@@ -180,13 +184,15 @@ primary : NUMBER
 
 empty :
 
+```
+
 Esta gramática cobre as principais construções do *Pascal Standard*, incluindo suporte para *arrays*, funções, expressões lógicas e aritméticas, e comandos de entrada/saída.
 
 ## Análise Léxica
 
 A análise léxica foi implementada no ficheiro `PascalLexer.py` utilizando `ply.lex`. O analisador léxico converte o código-fonte Pascal numa sequência de *tokens*, reconhecendo:
 
-- **Palavras reservadas**: Como `program`, `begin`, `end`, etc., definidas como funções `t_NOME` para cada palavra.
+- **Palavras reservadas**: Como `program`, `begin`, `end`, entre outras, definidas como funções `t_NOME` para cada palavra.
 - **Identificadores**: Sequências de letras e dígitos começando por uma letra (`[a-zA-Z][a-zA-Z0-9]*`).
 - **Números**: Inteiros representados por `\d+`, convertidos para valores inteiros.
 - **Strings**: Sequências entre aspas simples ou duplas (`"[^"]*"|'[^\']*\'`), com as aspas removidas.
@@ -278,7 +284,7 @@ O código gerado para o programa exemplo `BinarioParaInteiro` foi impresso, demo
 
 ## Testes
 
-Os testes foram implementados no ficheiro `testes.py`, que processa programas Pascal na pasta `testes`. Foram fornecidos 7 programas válidos e 4 programas com erros:
+Os testes foram implementados no ficheiro `testes.py`, que processa programas Pascal na pasta `testes`. Foram fornecidos 11 programas válidos e 5 programas com erros:
 
 ### Programas Válidos
 
@@ -289,6 +295,10 @@ Os testes foram implementados no ficheiro `testes.py`, que processa programas Pa
 5. **Soma de Array**: Testa *arrays* e ciclos `for`.
 6. **Binário para Decimal**: Testa *strings*, função `length` e ciclos `for`.
 7. **Binário para Decimal (com função)**: Testa declaração e chamada de funções.
+8. **Funcionamento do not**: Testa o `not` em diversos casos 
+9. **Inteiros negativos**: Testa operações aritmeticas com `integer` negativos 
+10. **Conta Palavras**: Diversifica ainda mais os testes que ja tinhamos, testando alguns operadores que ainda não tinham sido usados
+11. **Conta Palavras com func**: O mesmo do caso de cima, mas usando uma função
 
 ### Programas com Erros
 
@@ -306,15 +316,13 @@ Embora o compilador atenda aos requisitos do projeto, algumas melhorias podem se
 
 ### Análise Semântica Mais Robusta
 
-- **Verificação de Escopo**: Atualmente, variáveis locais e globais são distinguidas, mas não há verificação explícita de conflitos de nomes entre escopos (e.g., variável local com o mesmo nome de uma global).
 - **Controlo de Inicialização**: Poderia ser adicionada uma verificação para garantir que variáveis são inicializadas antes de serem usadas.
 - **Tipos Compostos**: Suportar tipos mais complexos, como registros (`record`) ou apontadores, para estar em maior conformidade com *Pascal Standard*.
 - **Constantes**: Adicionar suporte para declarações de constantes (`const`) e verificar o seu uso correto.
 
 ### Otimização de Código
 
-- Implementar otimizações locais (e.g., eliminação de código morto, propagação de constantes) e globais (e.g., alocação eficiente de variáveis).
-- Reduzir o número de instruções geradas, como combinar operações redundantes.
+- Implementar ainda mais otimizações, por exemplo, reduzindo o número de instruções geradas, como combinar operações redundantes.
 
 ### Melhor Gestão de Erros
 
@@ -324,15 +332,9 @@ Embora o compilador atenda aos requisitos do projeto, algumas melhorias podem se
 ### Suporte a Mais Construções
 
 - Adicionar suporte para `case`, `repeat-until` e outras construções do *Pascal Standard*.
-- Implementar manipulação de ficheiros, conforme suportado em algumas variantes do Pascal.
-
-### Testes Adicionais
-
-- Criar testes para casos extremos, como *arrays* com índices negativos ou programas com muitas variáveis/funções.
-- Testar a robustez do compilador com programas malformados ou muito grandes.
 
 ## Conclusão
 
 O compilador desenvolvido cumpre os objetivos do projeto, implementando análise léxica, sintática, semântica e geração de código para a linguagem *Pascal Standard*. A gramática definida cobre as principais construções da linguagem, e as verificações semânticas garantem a coerência do código. Os testes realizados validaram a funcionalidade para programas válidos e a deteção de erros.
 
-Apesar de funcional, o compilador pode ser melhorado com suporte a *procedures*, otimizações de código e verificações semânticas mais rigorosas. Estas melhorias aumentariam a robustez e a conformidade com o padrão Pascal. O projeto proporcionou uma compreensão profunda dos conceitos de compiladores, desde a análise léxica até a geração de código, e foi uma oportunidade valiosa para aplicar ferramentas como `ply.lex` e `ply.yacc`.
+Como trabalho futuro poderiamos aplicar as melhorias que referimos acima, fazendo com que o projeto se tornasse mais completo ainda.O projeto proporcionou uma compreensão profunda dos conceitos de compiladores, desde a análise léxica até a geração de código, e foi uma oportunidade valiosa para aplicar ferramentas como `ply.lex` e `ply.yacc`.
